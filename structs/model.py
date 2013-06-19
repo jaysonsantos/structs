@@ -1,0 +1,2 @@
+class StructModel(object):
+    pass
