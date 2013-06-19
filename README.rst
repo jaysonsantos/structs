@@ -5,8 +5,14 @@ structs is intended to make life easier when you have to speak with binary data 
 
 The idea is something like this:
 
-Instead of (magic, opcode, key_length, ext_length, data_type, status, body_length, opaque, cas) = struct.unpack('!BBHBBHLLQ', value) you would do this:
+Instead of 
 
+.. code-block:: python
+    
+    import struct
+    (magic, opcode, key_length, ext_length, data_type, status, body_length, opaque, cas) = struct.unpack('!BBHBBHLLQ', value)
+    
+you would do this:
 
 .. code-block:: python
 
