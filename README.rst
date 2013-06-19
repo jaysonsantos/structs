@@ -13,6 +13,7 @@ Instead of (magic, opcode, key_length, ext_length, data_type, status, body_lengt
     from structs.model import StructModel
     from structs import fields
 
+
     class MemcachedProtocol(StructModel):
         magic = fields.UChar()
         opcode = fields.UChar()
@@ -29,4 +30,4 @@ Instead of (magic, opcode, key_length, ext_length, data_type, status, body_lengt
     # Now access unpacked binary data with:
     assert protocol_return.magic == 129  # 0x81 to integer
 
-
+With this I want to do a different approach than ctypes Structure, I want this to be able to have nested models where you can create a class that hold an entire protocol like ForeignKeys and on model's construction you could send a file descriptor and that model would seek only desired data for it.
