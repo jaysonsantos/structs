@@ -1,5 +1,13 @@
 class BaseStructField(object):
-    pass
+    # Used to keep declared order of fields on models TODO: Check for race condition
+    _creation_counter = 0
+
+    def __init__(self):
+        self._creation_counter = BaseStructField._creation_counter
+        BaseStructField._creation_counter += 1
+
+        self._struct = ''
+        self.value = None
 
 
 class Char(BaseStructField):
@@ -70,3 +78,26 @@ class Double(BaseStructField):
 class String(BaseStructField):
     """string"""
     struct_type = 's'
+
+
+class DefaultByteOrder(BaseStructField):
+    """
+    Must be first declared field this determine byte order size and alignment.
+    """
+    struct_type = '@'
+
+
+class NativeByteOrder(DefaultByteOrder):
+    struct_type = '='
+
+
+class LitteEndianByteOrder(DefaultByteOrder):
+     struct_type = '<'
+
+
+class BigEndianByteOrder(DefaultByteOrder):
+    struct_type = '>'
+
+
+class NetworkByteOrder(DefaultByteOrder):
+    struct_type = '!'
