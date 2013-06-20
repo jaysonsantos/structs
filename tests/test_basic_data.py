@@ -16,6 +16,6 @@ class MemcachedProtocol(model.StructModel):
 
 
 def test_unpacking():
-    p = MemcachedProtocol('0x81')
-    import ipdb;ipdb.set_trace()
+    p = MemcachedProtocol('\x81\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x08\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00c')
     assert p.magic == 129
+    p.magic = 123

@@ -4,3 +4,7 @@ class StructsException(Exception):
 
 class InvalidData(StructsException):
     pass
+
+
+class InvalidDataSize(StructsException):
+    pass

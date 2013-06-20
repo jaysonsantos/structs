@@ -9,6 +9,12 @@ class BaseStructField(object):
         self._struct = ''
         self.value = None
 
+    def __get__(self, *args, **kwargs):
+        return self.value
+
+    def __set__(self, parent, value):
+        self.value = value
+
 
 class Char(BaseStructField):
     """string of length 1"""
