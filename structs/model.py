@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import struct
-from structs.exceptions import InvalidData, InvalidDataSize
-from structs.fields import BaseStructField
+from structs.exceptions import InvalidData, InvalidDataSize, InvalidModelDeclaration
+from structs.fields import BaseStructField, DefaultByteOrder
 
 __all__ = ('StructModel',)
 
@@ -11,6 +11,9 @@ class StructMeta(type):
         new_cls = type.__new__(cls, model, bases, attrs)
         declared_fields = [(key, value) for key, value in attrs.iteritems() if isinstance(value, BaseStructField)]
         new_cls._fields = OrderedDict(sorted(declared_fields, key=lambda x: x[1]._creation_counter))
+        if new_cls._fields and not isinstance(new_cls._fields.values()[0], DefaultByteOrder):
+            raise InvalidModelDeclaration('First field of a class must be subclass of DefaultByteOrder')
+
         return new_cls
 
 

@@ -8,3 +8,7 @@ class InvalidData(StructsException):
 
 class InvalidDataSize(StructsException):
     pass
+
+
+class InvalidModelDeclaration(StructsException):
+    pass
