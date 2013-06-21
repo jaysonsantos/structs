@@ -5,13 +5,13 @@ structs is intended to make life easier when you have to speak with binary data 
 
 The idea is something like this:
 
-Instead of 
+Instead of
 
 .. code-block:: python
-    
+
     import struct
     (magic, opcode, key_length, ext_length, data_type, status, body_length, opaque, cas) = struct.unpack('!BBHBBHLLQ', value)
-    
+
 you would do this:
 
 .. code-block:: python
@@ -20,7 +20,8 @@ you would do this:
     from structs import fields
 
 
-    class MemcachedProtocol(StructModel):
+    class MemcachedProtocol(model.StructModel):
+        byte_order = fields.NetworkByteOrder()
         magic = fields.UChar()
         opcode = fields.UChar()
         key_length = fields.UShort()
